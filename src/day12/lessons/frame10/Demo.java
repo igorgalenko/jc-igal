@@ -20,6 +20,7 @@ public class Demo {
                 public void run() {
                     Skates skates = skatingRing.getSkates(skater);
                     sleep(random.nextInt(2000));
+                    skatingRing.returnSkates(skates, skater);
                 }
             }).start();
         }
