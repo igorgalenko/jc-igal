@@ -6,10 +6,13 @@ import java.util.Random;
  * Created by IVG 2015
  */
 public class Demo {
+
+    protected static volatile int canGet = 5;
+
     public static void main(String[] args) {
         System.out.println("Open");
 
-        final SkatingRing skatingRing = new SchoolSkatingRing();
+        final SkatingRing skatingRing = new VipSkatingRink();
         final Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
@@ -19,12 +22,12 @@ public class Demo {
                 @Override
                 public void run() {
                     Skates skates = skatingRing.getSkates(skater);
-                    sleep(random.nextInt(2000));
-                    skatingRing.returnSkates(skates, skater);
+                        sleep(random.nextInt(2000));
+                        skatingRing.returnSkates(skates, skater);
                 }
             }).start();
         }
-        sleep(random.nextInt(2000));
+        sleep(random.nextInt(1000));
     }
 
     private static void sleep(int timeout) {
