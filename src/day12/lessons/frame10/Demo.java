@@ -15,15 +15,18 @@ public class Demo {
         final SkatingRing skatingRing = new VipSkatingRink();
         final Random random = new Random();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             final Skater skater = new Skater("Skater " + i);
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Skates skates = skatingRing.getSkates(skater);
+                    Skates skates = null;
+                    while (skates == null) {
+                        skates = skatingRing.getSkates(skater);
                         sleep(random.nextInt(2000));
-                        skatingRing.returnSkates(skates, skater);
+                    }
+                    skatingRing.returnSkates(skates, skater);
                 }
             }).start();
         }
