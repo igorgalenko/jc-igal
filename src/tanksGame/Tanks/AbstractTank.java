@@ -5,16 +5,18 @@ package tanksGame.Tanks;
 //import lessons.Frame39.ActionField;
 
 import tanksGame.ActionField;
+import tanksGame.Drawable;
 import tanksGame.battleField.BattleField;
 import tanksGame.Bullet;
 import tanksGame.Direction;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 /**
  * Created by IVG on 13.06.15.
  */
-public abstract class AbstractTank {
+public abstract class AbstractTank implements Drawable{
     protected int speed;
     private int x;
     private int y;
@@ -24,10 +26,11 @@ public abstract class AbstractTank {
 
     protected Color tankColor;
     protected Color towerColor;
+    protected Image image;
 
     public AbstractTank(ActionField af, BattleField bf) {
 
-        this(af,bf,64*4,8*64, Direction.UP);
+        this(af,bf,0,0, Direction.UP);
         speed = 10;
 
     }
@@ -42,6 +45,14 @@ public abstract class AbstractTank {
         speed = 10;
 
 
+    }
+
+    public BattleField getBattleField() {
+        return battleField;
+    }
+
+    public ActionField getActionField() {
+        return actionField;
     }
 
     public void turn(Direction direction) throws Exception {
@@ -146,19 +157,32 @@ public abstract class AbstractTank {
     }
 
     public void draw(Graphics g) {
-        g.setColor(tankColor);
-        g.fillRect(this.getX(), this.getY(), 64, 64);
+//        g.setColor(tankColor);
+//        g.fillRect(this.getX(), this.getY(), 64, 64);
+//
+//        g.setColor(towerColor);
+//        if (this.getDirection() == Direction.UP) {
+//            g.fillRect(this.getX() + 20, this.getY(), 24, 34);
+//        } else if (this.getDirection() == Direction.DOWN) {
+//            g.fillRect(this.getX() + 20, this.getY() + 30, 24, 34);
+//        } else if (this.getDirection() == Direction.LEFT) {
+//            g.fillRect(this.getX(), this.getY() + 20, 34, 24);
+//        } else {
+//            g.fillRect(this.getX() + 30, this.getY() + 20, 34, 24);
+//        }
+//        Graphics2D graphics2D = (Graphics2D) g;
+//        Composite orig = graphics2D.getComposite();
+//        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
-        g.setColor(towerColor);
-        if (this.getDirection() == Direction.UP) {
-            g.fillRect(this.getX() + 20, this.getY(), 24, 34);
-        } else if (this.getDirection() == Direction.DOWN) {
-            g.fillRect(this.getX() + 20, this.getY() + 30, 24, 34);
-        } else if (this.getDirection() == Direction.LEFT) {
-            g.fillRect(this.getX(), this.getY() + 20, 34, 24);
-        } else {
-            g.fillRect(this.getX() + 30, this.getY() + 20, 34, 24);
-        }
+        g.drawImage(image, x, y, 64, 64, Color.BLACK, new ImageObserver() {
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+                return false;
+            }
+        });
+//        graphics2D.setComposite(orig);
 
     }
+
+    public abstract void destroyDefender(AbstractTank defender) throws Exception;
 }

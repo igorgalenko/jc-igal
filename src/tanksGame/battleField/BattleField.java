@@ -5,10 +5,6 @@ public class BattleField {
     private final int BF_WIDTH = 576;
     private final int BF_HEIGHT = 576;
 
-    private AbstractFieldObject[][] b = {
-        {new Brick()}
-    };
-
     private String[][] battleField =
             {   //1   2   3   4   5   6   7   8   9
                 {" ","B","B","B"," ","B","B","B"," "}, //1
@@ -17,8 +13,8 @@ public class BattleField {
                 {"B"," ","B","B","B","B","B"," ","B"}, //4
                 {"B"," ","B","B"," ","B","B"," ","B"}, //5
                 {"B","B","B","B"," ","B","B","B","B"}, //6
-                {"B"," "," ","B"," ","B"," "," ","B"}, //7
-                {"W"," "," ","B"," ","B"," "," ","B"}, //8
+                {"B"," ","W","B"," ","B"," "," ","B"}, //7
+                {"W"," ","W","B"," ","B"," "," ","B"}, //8
                 {"B","B","E","B"," ","B","B","R","B"}  //9
             };
 

@@ -4,22 +4,34 @@ import tanksGame.ActionField;
 import tanksGame.battleField.BattleField;
 import tanksGame.Direction;
 
-import java.awt.*;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by IVG on 03.07.15.
  */
 public class T34 extends AbstractTank {
+
+    private final String IMAGE_FILE = "2.jpg";
+
     public T34(ActionField af, BattleField bf) {
-        super(af, bf);
-        tankColor = new Color(0,255,0);
-        towerColor = new Color(255,255,0);
+
+        this(af,bf,64*4,8*64, Direction.UP);
 
     }
 
     public T34(ActionField af, BattleField bf, int x, int y, Direction direction) {
         super(af, bf, x, y, direction);
-        tankColor = new Color(0,255,0);
-        towerColor = new Color(255,255,0);
+        try {
+            image = ImageIO.read(new File(IMAGE_FILE));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void destroyDefender(AbstractTank defender) {
+
     }
 }
