@@ -2,6 +2,7 @@ package tanksGame.battleField;
 
 import tanksGame.Destroyable;
 import tanksGame.Drawable;
+import tanksGame.Launcher;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.io.IOException;
  */
 public class Brick extends AbstractFieldObject implements Destroyable, Drawable{
 
-    private final String IMAGE_FILE = "Brick.jpg";
+    private final String IMAGE_FILE = Launcher.resPath+"Brick.jpg";
 
     public Brick() {
         color = Color.RED;

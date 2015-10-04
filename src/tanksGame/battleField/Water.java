@@ -1,6 +1,7 @@
 package tanksGame.battleField;
 
 import tanksGame.Drawable;
+import tanksGame.Launcher;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.io.IOException;
  */
 public class Water extends AbstractFieldObject implements Drawable {
 
-    private final String IMAGE_FILE = "water.jpg";
+    private final String IMAGE_FILE = Launcher.resPath+"water.jpg";
 
     public Water() {
         color = Color.blue;

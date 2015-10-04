@@ -7,16 +7,18 @@ package tanksGame.Tanks;
 import tanksGame.ActionField;
 import tanksGame.Drawable;
 import tanksGame.battleField.BattleField;
-import tanksGame.Bullet;
+import tanksGame.battleField.Bullet;
 import tanksGame.Direction;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
+import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * Created by IVG on 13.06.15.
  */
-public abstract class AbstractTank implements Drawable{
+public abstract class AbstractTank implements Drawable, Runnable{
     protected int speed;
     private int x;
     private int y;
@@ -59,15 +61,22 @@ public abstract class AbstractTank implements Drawable{
         this.direction = direction;
         actionField.processTurn(this);
     }
+
+    @Override
+    public abstract void run();
+
     public void move() throws Exception {
+//        fire();
         actionField.processMove(this);
     }
     public void fire() throws Exception {
         Bullet bullet = new Bullet(x+25,y+25, direction);
+        bullet.setOwner(this);
         actionField.processFire(bullet);
     }
 
     public void moveToQuadrant(int v, int h) throws Exception {
+
         String coordinates = actionField.getQuadrantXY(v, h);
         int separator = coordinates.indexOf("_");
         int y = Integer.parseInt(coordinates.substring(0, separator));
@@ -138,22 +147,19 @@ public abstract class AbstractTank implements Drawable{
     }
 
     public int getRandomX() {
-        return random()*64-64;
+        return getRandomPosition()*64-64;
     }
 
     public int getRandomY() {
         return 1*64-64;
     }
 
-    private int random() {
-        Long millis = System.currentTimeMillis();
-        int r = Integer.valueOf(millis.toString().substring(12))/3;
-        if (r == 2) {
-            r = 5;
-        } else if (r==3) {
-            r = 9;
-        } else {r=1;}
-        return r;
+    private int getRandomPosition() {
+
+        int posArr[] = {1, battleField.getDimentionX() / 2, battleField.getDimentionX()};
+        Random random = new Random();
+
+        return posArr[random.nextInt(3)];
     }
 
     public void draw(Graphics g) {
@@ -183,6 +189,4 @@ public abstract class AbstractTank implements Drawable{
 //        graphics2D.setComposite(orig);
 
     }
-
-    public abstract void destroyDefender(AbstractTank defender) throws Exception;
 }

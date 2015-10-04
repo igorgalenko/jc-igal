@@ -1,6 +1,7 @@
 package tanksGame.Tanks;
 
 import tanksGame.ActionField;
+import tanksGame.Launcher;
 import tanksGame.battleField.BattleField;
 import tanksGame.Direction;
 
@@ -9,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Irina on 25.06.2015.
+ * Created by IVG on 25.06.2015.
  */
 public class Tiger extends AbstractTank {
 
     private int armor = 1;
-    private final String IMAGE_FILE = "tiger.png";
+    private final String IMAGE_FILE = Launcher.resPath+"tiger.png";
 
     public Tiger(ActionField af, BattleField bf) {
         super(af, bf);
@@ -35,6 +36,15 @@ public class Tiger extends AbstractTank {
     }
 
     @Override
+    public void run() {
+        try {
+            destroyDefender();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean destroy() {
         if (armor > 0) {
             armor--;
@@ -44,18 +54,24 @@ public class Tiger extends AbstractTank {
         return true;
     }
 
-    public void destroyDefender(AbstractTank defender) throws Exception {
+    public void destroyDefender() throws Exception {
 
+        ActionField af = getActionField();
         BattleField bf = getBattleField();
-        int defenderX = defender.getX()/64+1;
-        int defenderY = defender.getY()/64+1;
 
-        moveToQuadrant(getY()/64+1,defenderX);
+        AbstractTank defender = af.getDefender();
+
+        moveRandom();
+
+        int defenderX = defender.getX() / 64 + 1;
+        int defenderY = defender.getY() / 64 + 1;
+
+        moveToQuadrant(getY() / 64 + 1, defenderX);
         turn(Direction.DOWN);
 
         while (defenderX > 0) {
             fire();
-            defenderX = defender.getX()/64+1;
+            defenderX = defender.getX() / 64 + 1;
         }
 
     }

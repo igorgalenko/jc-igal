@@ -36,7 +36,7 @@ public class BT7 extends AbstractTank {
     }
 
     @Override
-    public void destroyDefender(AbstractTank defender) {
+    public void run() {
 
     }
 

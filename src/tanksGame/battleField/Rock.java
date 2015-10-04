@@ -1,6 +1,7 @@
 package tanksGame.battleField;
 
 import tanksGame.Drawable;
+import tanksGame.Launcher;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.io.IOException;
  */
 public class Rock extends AbstractFieldObject implements Drawable {
 
-    private final String IMAGE_FILE = "rock.jpg";
+    private final String IMAGE_FILE = Launcher.resPath+"rock.jpg";
 
 
     public Rock() {

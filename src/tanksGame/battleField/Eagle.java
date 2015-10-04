@@ -2,6 +2,7 @@ package tanksGame.battleField;
 
 import tanksGame.Destroyable;
 import tanksGame.Drawable;
+import tanksGame.Launcher;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.io.IOException;
  */
 public class Eagle extends AbstractFieldObject implements Drawable, Destroyable{
 
-    private static String IMAGE_FILE = "Flag.png";
+    private String IMAGE_FILE = Launcher.resPath+"Flag.png";
 
     public Eagle() {
         color = Color.YELLOW;

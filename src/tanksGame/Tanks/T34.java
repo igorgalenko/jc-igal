@@ -1,6 +1,7 @@
 package tanksGame.Tanks;
 
 import tanksGame.ActionField;
+import tanksGame.Launcher;
 import tanksGame.battleField.BattleField;
 import tanksGame.Direction;
 
@@ -13,11 +14,11 @@ import java.io.IOException;
  */
 public class T34 extends AbstractTank {
 
-    private final String IMAGE_FILE = "2.jpg";
+    private final String IMAGE_FILE = Launcher.resPath+"2.jpg";
 
     public T34(ActionField af, BattleField bf) {
 
-        this(af,bf,64*4,8*64, Direction.UP);
+        this(af, bf, 64 * 4, 8 * 64, Direction.UP);
 
     }
 
@@ -31,7 +32,14 @@ public class T34 extends AbstractTank {
     }
 
     @Override
-    public void destroyDefender(AbstractTank defender) {
+    public void run() {
 
+    }
+
+    @Override
+    public boolean destroy() {
+        super.destroy();
+        getActionField().showResult();
+        return true;
     }
 }
