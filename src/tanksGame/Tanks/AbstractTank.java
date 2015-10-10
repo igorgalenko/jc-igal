@@ -59,7 +59,7 @@ public abstract class AbstractTank implements Drawable, Runnable{
 
     public void turn(Direction direction) throws Exception {
         this.direction = direction;
-        actionField.processTurn(this);
+//        actionField.processTurn(this);
     }
 
     @Override
@@ -82,37 +82,40 @@ public abstract class AbstractTank implements Drawable, Runnable{
         int y = Integer.parseInt(coordinates.substring(0, separator));
         int x = Integer.parseInt(coordinates.substring(separator + 1));
 
+        while (this.x != x || this.y != y) {
+
+            changeDirection(x, y);
+
+//            clearPass();
+
+            move();
+        }
+
+    }
+
+    public void changeDirection(int x, int y) throws Exception {
+
+//        direction = (this.x < x) ? Direction.RIGHT : Direction.LEFT;
+//        direction = (this.y < y) ? Direction.DOWN : Direction.UP;
+
         if (this.x < x) {
-            while (this.x != x) {
-                direction = Direction.RIGHT;
-                move();
-            }
-        } else {
-            while (this.x != x) {
-                direction = Direction.LEFT;
-                move();
-            }
+            direction = Direction.RIGHT;
+        } else if (this.x > x) {
+            direction = Direction.LEFT;
+        } else if (this.y < y) {
+            direction = Direction.DOWN;
+        } else if (this.y > y) {
+            direction = Direction.UP;
         }
 
-        if (this.y < y) {
-            while (this.y != y) {
-                direction = Direction.DOWN;
-                move();
-            }
-        } else {
-            while (this.y != y) {
-                direction = Direction.UP;
-                move();
-            }
-        }
-
+        System.out.println("Direction = " + direction);
     }
 
     public void moveRandom() throws Exception {
 
     }
 
-    public void clean() throws Exception {
+    public void clearPass() throws Exception {
 
     }
 
@@ -146,11 +149,11 @@ public abstract class AbstractTank implements Drawable, Runnable{
         return true;
     }
 
-    public int getRandomX() {
+    public int getRandomV() {
         return getRandomPosition()*64-64;
     }
 
-    public int getRandomY() {
+    public int getRandomH() {
         return 1*64-64;
     }
 
@@ -160,6 +163,10 @@ public abstract class AbstractTank implements Drawable, Runnable{
         Random random = new Random();
 
         return posArr[random.nextInt(3)];
+    }
+
+    public boolean isAlive() {
+        return x > 0;
     }
 
     public void draw(Graphics g) {

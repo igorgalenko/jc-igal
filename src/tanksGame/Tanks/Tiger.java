@@ -58,21 +58,23 @@ public class Tiger extends AbstractTank {
 
         ActionField af = getActionField();
         BattleField bf = getBattleField();
-
         AbstractTank defender = af.getDefender();
-
-        moveRandom();
 
         int defenderX = defender.getX() / 64 + 1;
         int defenderY = defender.getY() / 64 + 1;
 
-        moveToQuadrant(getY() / 64 + 1, defenderX);
-        turn(Direction.DOWN);
+//      на одной вертикали
+        if (defender.getY() == getY()) {
 
-        while (defenderX > 0) {
-            fire();
-            defenderX = defender.getX() / 64 + 1;
+        } else if (defender.getX() == getX()) {
+
         }
+        moveToQuadrant(bf.getQuadrantY(getY()), bf.getQuadrantX(defender.getX()));
+
+//        while (defender.isAlive()) {
+//
+//            fire();
+//        }
 
     }
 }

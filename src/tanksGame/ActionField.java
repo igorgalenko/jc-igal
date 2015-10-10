@@ -206,10 +206,10 @@ public class ActionField extends JPanel{
 
         while (true) {
 
-            if (bullet.getY() < -25 || bullet.getY() >= 576) {
+            if (bullet.getY() < -25 || bullet.getY() >= battleField.getBF_HEIGHT()) {
                 break;
             }
-            if (bullet.getX() <= 0 || bullet.getX() >= 576) {
+            if (bullet.getX() <= 0 || bullet.getX() >= battleField.getBF_WIDTH()) {
                 break;
             }
 

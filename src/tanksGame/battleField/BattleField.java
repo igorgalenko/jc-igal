@@ -47,4 +47,12 @@ public class BattleField {
     public int getDimentionY() {
         return battleField.length;
     }
+
+    public int getQuadrantY(int y) {
+        return y / 64;
+    }
+
+    public int getQuadrantX(int x) {
+        return x / 64;
+    }
 }
